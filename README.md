@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# stripe-churn-calculator
 
-## Getting Started
+**See exactly how much MRR you're leaking — free, instant, no account required.**
 
-First, run the development server:
+> Drop your Stripe export and get a full breakdown: failed payment MRR, voluntary churn, churn rate, LTV, and your recovery opportunity. Runs entirely in your browser.
+
+---
+
+## Demo
+
+_[Demo GIF — coming soon]_
+
+---
+
+## Quick Start
+
+**Option 1 — Use the hosted version:**  
+👉 [stripe-churn-calculator.vercel.app](https://stripe-churn-calculator.vercel.app) _(deploy link — update after Vercel deploy)_
+
+**Option 2 — Run locally:**
 
 ```bash
+git clone https://github.com/yourusername/stripe-churn-calculator
+cd stripe-churn-calculator
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to export from Stripe
 
-## Learn More
+1. Go to **Stripe Dashboard → Payments**
+2. Click **Export** in the top right
+3. Select your date range and download the CSV
+4. Drop it into the calculator
 
-To learn more about Next.js, take a look at the following resources:
+Or skip the export and enter your numbers manually.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+- **Failed payment analysis** — see exactly how much MRR is lost to failed charges each month
+- **Voluntary churn breakdown** — cancellations vs payment failures, side by side
+- **Churn rate & LTV** — calculated from your real data
+- **Recovery opportunity** — estimates how much you could recover with smart retry logic
+- **MRR trend chart** — visualizes 6 months of revenue and churn
+- **Shareable report** — one-click copy to share your results
+- **Zero backend** — everything processes in your browser, nothing is uploaded
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## How it works
+
+1. You drop a Stripe charges CSV (or enter numbers manually)
+2. The tool parses it client-side using [Papa Parse](https://www.papaparse.com/)
+3. Calculates MRR, churn, LTV, and recovery opportunity
+4. Renders a full report — no server, no storage, no account
+
+---
+
+## Deploy your own
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/stripe-churn-calculator)
+
+No environment variables needed. Zero config.
+
+---
+
+## Contributing
+
+Issues and PRs welcome. Good first issues are labeled [`good first issue`](../../issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+
+Things that would be useful:
+- Support for Stripe subscriptions CSV (voluntary churn from cancellation data)
+- Cohort retention chart
+- PDF export of the report
+
+---
+
+## License
+
+MIT
+
+---
+
+Want to **automatically recover** the failed payments this tool finds?  
+→ [Reflow](https://getreflow.co) — AI-powered billing recovery for Stripe. No code required.
