@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion'
 import CSVUploader from '@/components/CSVUploader'
 import ManualInputForm from '@/components/ManualInput'
 import { parseStripeCSV } from '@/lib/parseStripeCSV'
@@ -24,7 +25,7 @@ export default function HomePage() {
       localStorage.setItem('churnReport', JSON.stringify(report))
       router.push('/report')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to parse CSV. Make sure it\'s a Stripe charges export.')
+      setError(err instanceof Error ? err.message : "Failed to parse CSV. Make sure it's a Stripe charges export.")
       setLoading(false)
     }
   }
@@ -39,15 +40,22 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#F6F9FC]">
       {/* Header */}
-      <header className="bg-[#0A2540] px-6 py-4">
+      <header className="bg-[#0A2540]/90 backdrop-blur-sm border-b border-white/5 px-6 py-4 sticky top-0 z-50">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-white font-bold text-lg tracking-tight">stripe-churn-calculator</span>
-            <span className="text-xs text-gray-500 bg-white/10 px-2 py-0.5 rounded-full">free · open source</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-6 h-6 rounded-md bg-[#635BFF] flex items-center justify-center">
+              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+              </svg>
+            </div>
+            <span className="text-white font-semibold text-sm tracking-tight">stripe-churn-calculator</span>
+            <span className="text-xs text-[#635BFF] bg-[#635BFF]/15 px-2 py-0.5 rounded-full font-medium">free</span>
           </div>
           <a
-            href="https://github.com"
-            className="text-gray-400 hover:text-white transition-colors"
+            href="https://github.com/mehadave/stripe-churn-calculator"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-500 hover:text-white transition-colors"
             aria-label="GitHub"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -58,63 +66,106 @@ export default function HomePage() {
       </header>
 
       {/* Hero */}
-      <div className="bg-gradient-to-b from-[#0A2540] to-[#1a3a5c] px-6 pt-12 pb-20">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
-            How much MRR are<br />you leaking?
-          </h1>
-          <p className="text-gray-300 text-lg max-w-md mx-auto">
-            Find out in 30 seconds. Free, no account required, data never leaves your browser.
-          </p>
+      <div className="relative bg-gradient-to-b from-[#0A2540] via-[#0d2d4f] to-[#F6F9FC] px-6 pt-16 pb-24 overflow-hidden">
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: 'linear-gradient(#635BFF 1px, transparent 1px), linear-gradient(90deg, #635BFF 1px, transparent 1px)',
+          backgroundSize: '40px 40px'
+        }} />
+        {/* Purple glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-[#635BFF]/20 rounded-full blur-3xl" />
+
+        <div className="relative max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="inline-flex items-center gap-2 bg-[#635BFF]/20 border border-[#635BFF]/30 text-[#a5a0ff] text-xs font-medium px-3 py-1.5 rounded-full mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF] animate-pulse" />
+              Free · No account · Open source
+            </div>
+            <h1 className="text-5xl sm:text-6xl font-black text-white leading-tight mb-5 tracking-tight">
+              How much MRR are<br />
+              <span className="text-[#FF4D4F]">you leaking?</span>
+            </h1>
+            <p className="text-white font-semibold text-lg max-w-md mx-auto [text-shadow:0_2px_12px_rgba(10,37,64,0.8)]">
+              Find out in 30 seconds. Data never leaves your browser.
+            </p>
+          </motion.div>
         </div>
       </div>
 
       {/* Card */}
-      <div className="max-w-3xl mx-auto px-6 -mt-12 pb-16">
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+      <div className="max-w-3xl mx-auto px-6 -mt-14 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="bg-white rounded-2xl border border-gray-200/80 shadow-xl shadow-gray-200/60 overflow-hidden"
+        >
           {/* Tabs */}
-          <div className="flex border-b border-gray-100">
+          <div className="flex p-2 gap-1 bg-[#F6F9FC] border-b border-gray-100">
             {(['csv', 'manual'] as Tab[]).map(t => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className={`flex-1 py-4 text-sm font-medium transition-colors ${
-                  tab === t
-                    ? 'text-[#635BFF] border-b-2 border-[#635BFF]'
-                    : 'text-gray-400 hover:text-gray-600'
+                className={`relative flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 ${
+                  tab === t ? 'text-[#635BFF]' : 'text-gray-400 hover:text-gray-600'
                 }`}
               >
-                {t === 'csv' ? '📂  Upload Stripe CSV' : '✏️  Enter manually'}
+                {tab === t && (
+                  <motion.div
+                    layoutId="tab-pill"
+                    className="absolute inset-0 bg-white rounded-xl shadow-sm border border-gray-100"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
+                  />
+                )}
+                <span className="relative">
+                  {t === 'csv' ? 'Upload Stripe CSV' : 'Enter manually'}
+                </span>
               </button>
             ))}
           </div>
 
           <div className="p-8">
-            {tab === 'csv' ? (
-              <div className="space-y-4">
-                <CSVUploader onFile={handleCSV} loading={loading} error={error} />
-                <div className="bg-[#F6F9FC] rounded-lg p-4">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">How to export from Stripe</p>
-                  <ol className="text-xs text-gray-500 space-y-1 list-decimal list-inside">
-                    <li>Go to <span className="font-medium">Stripe Dashboard → Payments</span></li>
-                    <li>Click <span className="font-medium">Export</span> in the top right</li>
-                    <li>Select date range and download CSV</li>
-                    <li>Drop it above ↑</li>
-                  </ol>
-                </div>
-              </div>
-            ) : (
-              <ManualInputForm onSubmit={handleManual} loading={loading} />
-            )}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={tab}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+              >
+                {tab === 'csv' ? (
+                  <div className="space-y-4">
+                    <CSVUploader onFile={handleCSV} loading={loading} error={error} />
+                    <div className="bg-[#F6F9FC] rounded-xl p-4 border border-gray-100">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2.5">How to export from Stripe</p>
+                      <ol className="text-xs text-gray-500 space-y-1.5 list-decimal list-inside">
+                        <li>Go to <span className="font-semibold text-gray-600">Stripe Dashboard → Payments</span></li>
+                        <li>Click <span className="font-semibold text-gray-600">Export</span> in the top right</li>
+                        <li>Select date range and download CSV</li>
+                        <li>Drop it above ↑</li>
+                      </ol>
+                    </div>
+                  </div>
+                ) : (
+                  <ManualInputForm onSubmit={handleManual} loading={loading} />
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          <div className="px-8 pb-6 flex items-center gap-2 text-xs text-gray-400">
-            <svg className="w-3.5 h-3.5 text-[#00D4AA] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-            </svg>
-            Your data is processed entirely in your browser and never uploaded anywhere
+          <div className="px-8 pb-5 flex items-center gap-2 text-xs text-gray-400 border-t border-gray-50 pt-4">
+            <div className="w-4 h-4 rounded-full bg-[#00D4AA]/15 flex items-center justify-center flex-shrink-0">
+              <svg className="w-2.5 h-2.5 text-[#00D4AA]" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+              </svg>
+            </div>
+            Processed entirely in your browser — data is never uploaded anywhere
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
