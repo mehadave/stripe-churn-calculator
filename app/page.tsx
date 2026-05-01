@@ -166,6 +166,14 @@ export default function HomePage() {
                 </motion.span>
               ))}
             </p>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.5 }}
+              className="text-gray-400 text-base leading-relaxed max-w-xl mx-auto mb-8"
+            >
+              At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
+            </motion.p>
             <h1 className="text-5xl sm:text-6xl font-black text-white leading-tight mb-6 tracking-tight">
               How much MRR are<br />
               <span className="text-[#FF4D4F]">you leaking?</span>
