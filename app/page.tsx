@@ -58,7 +58,7 @@ export default function HomePage() {
       </header>
 
       {/* Hero */}
-      <div className="bg-[#0A2540] px-6 pt-12 pb-20">
+      <div className="bg-gradient-to-b from-[#0A2540] to-[#1a3a5c] px-6 pt-12 pb-20">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
             How much MRR are<br />you leaking?
