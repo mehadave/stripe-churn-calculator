@@ -94,7 +94,13 @@ export default function LeakReport({ report }: LeakReportProps) {
       {/* Metric cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <MetricCard label="Failed payments" value={formatCurrency(report.involuntaryChurnMRR)} subtitle="per month · recoverable" variant="danger" delay={0.1} />
-        <MetricCard label="Voluntary churn" value={formatCurrency(report.voluntaryChurnMRR)} subtitle="per month · cancellations" variant={report.voluntaryChurnMRR > 0 ? 'danger' : 'default'} delay={0.15} />
+        <MetricCard
+          label="Voluntary churn"
+          value={report.voluntaryChurnAvailable ? formatCurrency(report.voluntaryChurnMRR) : 'N/A'}
+          subtitle={report.voluntaryChurnAvailable ? 'per month · cancellations' : 'needs subscriptions CSV'}
+          variant={report.voluntaryChurnAvailable && report.voluntaryChurnMRR > 0 ? 'danger' : 'default'}
+          delay={0.15}
+        />
         <MetricCard label="Churn rate" value={formatPercent(report.churnRate)} subtitle="monthly" variant={report.churnRate > 0.05 ? 'danger' : 'default'} delay={0.2} />
         <MetricCard label="Avg LTV" value={report.avgLTV > 0 ? formatCurrency(report.avgLTV) : '—'} subtitle="at current churn" delay={0.25} />
       </div>

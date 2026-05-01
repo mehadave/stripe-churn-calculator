@@ -2,6 +2,8 @@ import { ChurnReport, ManualInput, MRRDataPoint } from './types'
 
 const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
+// ─── Manual entry path ────────────────────────────────────────────────────────
+
 export function calculateFromManual(input: ManualInput): ChurnReport {
   const { monthlyMRR, totalCustomers, failedPaymentsPerMonth, cancellationsPerMonth } = input
 
@@ -10,13 +12,12 @@ export function calculateFromManual(input: ManualInput): ChurnReport {
   const voluntaryChurnMRR = cancellationsPerMonth * avgSubAmount
   const totalLeakedMRR = involuntaryChurnMRR + voluntaryChurnMRR
 
-  const totalChurned = failedPaymentsPerMonth + cancellationsPerMonth
-  const churnRate = totalCustomers > 0 ? totalChurned / totalCustomers : 0
-  const avgRevenuePerCustomer = avgSubAmount
-  const avgLTV = churnRate > 0 ? avgRevenuePerCustomer / churnRate : 0
-  const recoveryOpportunity = involuntaryChurnMRR * 0.7
+  // Customer churn rate: churned customers / total customers (monthly)
+  const churned = failedPaymentsPerMonth + cancellationsPerMonth
+  const churnRate = totalCustomers > 0 ? churned / totalCustomers : 0
 
-  const mrrTrend = generateSyntheticTrend(monthlyMRR, totalLeakedMRR)
+  const avgLTV = churnRate > 0 ? avgSubAmount / churnRate : 0
+  const recoveryOpportunity = involuntaryChurnMRR * 0.7
 
   return {
     totalMRR: monthlyMRR,
@@ -27,9 +28,10 @@ export function calculateFromManual(input: ManualInput): ChurnReport {
     totalLeakedMRR,
     churnRate,
     avgLTV,
-    avgRevenuePerCustomer,
+    avgRevenuePerCustomer: avgSubAmount,
     recoveryOpportunity,
-    mrrTrend,
+    mrrTrend: generateSyntheticTrend(monthlyMRR, totalLeakedMRR),
+    voluntaryChurnAvailable: true,
   }
 }
 
@@ -43,21 +45,31 @@ function generateSyntheticTrend(currentMRR: number, monthlyLeak: number): MRRDat
   })
 }
 
+// ─── CSV path ─────────────────────────────────────────────────────────────────
+
 export function calculateFromCSVRows(rows: Record<string, string>[]): ChurnReport {
-  const charges = rows.map(row => ({
-    amount: parseFloat(row['Amount'] ?? row['amount'] ?? '0'),
+  const rawCharges = rows.map(row => ({
+    rawAmount: parseFloat(row['Amount'] ?? row['amount'] ?? '0'),
+    currency: (row['Currency'] ?? row['currency'] ?? 'usd').toLowerCase(),
     status: (row['Status'] ?? row['status'] ?? '').toLowerCase(),
     created: new Date(row['Created (UTC)'] ?? row['created'] ?? ''),
     customerId: row['Customer ID'] ?? row['customer_id'] ?? '',
   }))
 
+  // Detect if amounts are in minor units (cents).
+  // Stripe Dashboard CSV exports dollars; Stripe API / balance-transaction exports use cents.
+  // Heuristic: if the median non-zero amount > 500, assume cents and divide by 100.
+  const nonZero = rawCharges.map(c => c.rawAmount).filter(a => a > 0)
+  const median = nonZero.length
+    ? nonZero.slice().sort((a, b) => a - b)[Math.floor(nonZero.length / 2)]
+    : 0
+  const amountDivisor = median > 500 ? 100 : 1
+
+  const charges = rawCharges.map(c => ({ ...c, amount: c.rawAmount / amountDivisor }))
+
+  // Count distinct calendar months instead of using 30-day approximation
   const validDates = charges.map(c => c.created).filter(d => !isNaN(d.getTime()))
-  const monthsInDataset = validDates.length >= 2
-    ? Math.max(1, Math.ceil(
-        (Math.max(...validDates.map(d => d.getTime())) - Math.min(...validDates.map(d => d.getTime()))) /
-        (1000 * 60 * 60 * 24 * 30)
-      ))
-    : 1
+  const monthsInDataset = countDistinctMonths(validDates)
 
   const failed = charges.filter(c => c.status === 'failed')
   const succeeded = charges.filter(c => c.status === 'succeeded')
@@ -66,13 +78,21 @@ export function calculateFromCSVRows(rows: Record<string, string>[]): ChurnRepor
   const totalSucceededAmount = succeeded.reduce((s, c) => s + c.amount, 0)
 
   const involuntaryChurnMRR = totalFailedAmount / monthsInDataset
+  // Average monthly revenue (not strict MRR — charges CSV includes one-time charges too)
   const totalMRR = totalSucceededAmount / monthsInDataset
 
   const uniqueCustomers = new Set(charges.map(c => c.customerId).filter(Boolean))
   const totalCustomers = Math.max(uniqueCustomers.size, 1)
 
-  const churnRate = charges.length > 0 ? failed.length / charges.length : 0
+  // Customer churn rate: unique customers with a failed charge / total unique customers
+  // This is a proxy — charges CSV has no cancellation data
+  const uniqueFailedCustomers = new Set(failed.map(c => c.customerId).filter(Boolean))
+  const churnRate = uniqueFailedCustomers.size > 0
+    ? uniqueFailedCustomers.size / totalCustomers
+    : failed.length / Math.max(charges.length, 1)
+
   const avgRevenuePerCustomer = totalMRR / totalCustomers
+  // LTV = ARPU / monthly churn rate (standard SaaS formula)
   const avgLTV = churnRate > 0 ? avgRevenuePerCustomer / churnRate : 0
   const recoveryOpportunity = involuntaryChurnMRR * 0.7
 
@@ -88,7 +108,16 @@ export function calculateFromCSVRows(rows: Record<string, string>[]): ChurnRepor
     avgRevenuePerCustomer,
     recoveryOpportunity,
     mrrTrend: buildMonthlyTrend(charges),
+    // Charges CSV has no cancellation data — voluntary churn unavailable
+    voluntaryChurnAvailable: false,
   }
+}
+
+// Count distinct calendar months (e.g. Jan 2024, Feb 2024 = 2 months)
+function countDistinctMonths(dates: Date[]): number {
+  if (dates.length === 0) return 1
+  const months = new Set(dates.map(d => `${d.getFullYear()}-${d.getMonth()}`))
+  return Math.max(months.size, 1)
 }
 
 function buildMonthlyTrend(
@@ -98,6 +127,7 @@ function buildMonthlyTrend(
 
   charges.forEach(c => {
     if (isNaN(c.created.getTime())) return
+    // Zero-pad month so lexicographic sort == chronological sort
     const key = `${c.created.getFullYear()}-${String(c.created.getMonth()).padStart(2, '0')}`
     if (!byMonth[key]) byMonth[key] = { mrr: 0, churned: 0 }
     if (c.status === 'succeeded') byMonth[key].mrr += c.amount
@@ -112,6 +142,8 @@ function buildMonthlyTrend(
       return { month: MONTH_NAMES[month], mrr: Math.round(val.mrr), churned: Math.round(val.churned) }
     })
 }
+
+// ─── Formatters ───────────────────────────────────────────────────────────────
 
 export function formatCurrency(amount: number): string {
   return new Intl.NumberFormat('en-US', {

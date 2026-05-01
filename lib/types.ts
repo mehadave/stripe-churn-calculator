@@ -10,6 +10,7 @@ export interface ChurnReport {
   avgRevenuePerCustomer: number
   recoveryOpportunity: number
   mrrTrend: MRRDataPoint[]
+  voluntaryChurnAvailable: boolean
 }
 
 export interface MRRDataPoint {
