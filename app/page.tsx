@@ -140,14 +140,31 @@ export default function HomePage() {
                 {tab === 'csv' ? (
                   <div className="space-y-4">
                     <CSVUploader onFile={handleCSV} loading={loading} error={error} />
-                    <div className="bg-[#F6F9FC] rounded-xl p-4 border border-gray-100">
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2.5">How to export from Stripe</p>
-                      <ol className="text-xs text-gray-500 space-y-1.5 list-decimal list-inside">
-                        <li>Go to <span className="font-semibold text-gray-600">Stripe Dashboard → Payments</span></li>
-                        <li>Click <span className="font-semibold text-gray-600">Export</span> in the top right</li>
-                        <li>Select date range and download CSV</li>
-                        <li>Drop it above ↑</li>
-                      </ol>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-[#00D4AA]/5 border border-[#00D4AA]/20 rounded-xl p-4">
+                        <div className="flex items-center gap-1.5 mb-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#00D4AA]" />
+                          <p className="text-xs font-bold text-[#00D4AA] uppercase tracking-wider">Subscriptions CSV</p>
+                          <span className="text-xs text-[#00D4AA]/70 ml-auto">Most accurate</span>
+                        </div>
+                        <ol className="text-xs text-gray-500 space-y-1 list-decimal list-inside">
+                          <li>Dashboard → <span className="font-semibold text-gray-600">Billing → Subscriptions</span></li>
+                          <li>Click <span className="font-semibold text-gray-600">Export</span></li>
+                          <li>Download and drop above ↑</li>
+                        </ol>
+                      </div>
+                      <div className="bg-[#F6F9FC] border border-gray-100 rounded-xl p-4">
+                        <div className="flex items-center gap-1.5 mb-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
+                          <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Charges CSV</p>
+                          <span className="text-xs text-gray-400 ml-auto">Estimated</span>
+                        </div>
+                        <ol className="text-xs text-gray-500 space-y-1 list-decimal list-inside">
+                          <li>Dashboard → <span className="font-semibold text-gray-600">Payments</span></li>
+                          <li>Click <span className="font-semibold text-gray-600">Export</span></li>
+                          <li>Download and drop above ↑</li>
+                        </ol>
+                      </div>
                     </div>
                   </div>
                 ) : (

@@ -11,6 +11,7 @@ export interface ChurnReport {
   recoveryOpportunity: number
   mrrTrend: MRRDataPoint[]
   voluntaryChurnAvailable: boolean
+  csvType: 'charges' | 'subscriptions' | 'manual'
 }
 
 export interface MRRDataPoint {

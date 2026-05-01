@@ -60,7 +60,15 @@ export default function LeakReport({ report }: LeakReportProps) {
 
           <div className="relative flex items-start justify-between gap-4">
             <div>
-              <p className="text-gray-500 text-sm font-medium uppercase tracking-widest mb-2">You&apos;re leaking</p>
+              <div className="flex items-center gap-2 mb-2">
+                <p className="text-gray-500 text-sm font-medium uppercase tracking-widest">You&apos;re leaking</p>
+                {report.csvType === 'subscriptions' && (
+                  <span className="text-xs bg-[#00D4AA]/20 text-[#00D4AA] border border-[#00D4AA]/30 px-2 py-0.5 rounded-full font-medium">Subscriptions CSV · high accuracy</span>
+                )}
+                {report.csvType === 'charges' && (
+                  <span className="text-xs bg-white/10 text-gray-400 border border-white/10 px-2 py-0.5 rounded-full font-medium">Charges CSV · estimated</span>
+                )}
+              </div>
               <motion.p
                 className="text-[#FF4D4F] font-black leading-none tracking-tight"
                 style={{ fontSize: 'clamp(3rem, 10vw, 5rem)' }}

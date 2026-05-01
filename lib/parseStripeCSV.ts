@@ -1,6 +1,16 @@
 import Papa from 'papaparse'
-import { calculateFromCSVRows } from './calculations'
+import { calculateFromCSVRows, calculateFromSubscriptionsCSV } from './calculations'
 import { ChurnReport } from './types'
+
+function detectCSVType(headers: string[]): 'subscriptions' | 'charges' {
+  const set = new Set(headers.map(h => h.toLowerCase().trim()))
+  if (
+    set.has('plan amount') ||
+    set.has('plan interval') ||
+    set.has('canceled at (utc)')
+  ) return 'subscriptions'
+  return 'charges'
+}
 
 export function parseStripeCSV(file: File): Promise<ChurnReport> {
   return new Promise((resolve, reject) => {
@@ -14,7 +24,12 @@ export function parseStripeCSV(file: File): Promise<ChurnReport> {
           return
         }
         try {
-          resolve(calculateFromCSVRows(rows))
+          const type = detectCSVType(results.meta.fields ?? [])
+          resolve(
+            type === 'subscriptions'
+              ? calculateFromSubscriptionsCSV(rows)
+              : calculateFromCSVRows(rows)
+          )
         } catch (err) {
           reject(err)
         }
