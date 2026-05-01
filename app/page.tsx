@@ -178,6 +178,41 @@ export default function HomePage() {
       {/* Dark → light transition strip */}
       <div className="h-16 bg-gradient-to-b from-[#0f3460] to-[#F6F9FC]" />
 
+      {/* ── Tagline ────────────────────────────────────────────────── */}
+      <section className="max-w-2xl mx-auto px-6 pt-8 pb-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="inline-flex items-center gap-2 bg-[#635BFF]/10 border border-[#635BFF]/20 text-[#635BFF] text-xs font-semibold px-4 py-2 rounded-full mb-6 uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF] animate-pulse" />
+            Free · No account · Processes in your browser
+          </div>
+          <p className="text-[#1A1F36] text-xl sm:text-2xl font-bold leading-snug tracking-tight">
+            {[
+              'A free, simple, no-nonsense MRR calculator',
+              'built for',
+              '$100–$10k MRR',
+              'SaaS startups.',
+            ].map((chunk, i) => (
+              <motion.span
+                key={i}
+                className={`inline ${i === 2 ? 'text-[#635BFF] cursor-default' : 'cursor-default'}`}
+                whileHover={{ y: i === 2 ? -3 : -1, color: i === 2 ? '#4f46e5' : '#635BFF' }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              >
+                {chunk}{' '}
+              </motion.span>
+            ))}
+          </p>
+          <p className="mt-4 text-gray-500 text-base leading-relaxed max-w-xl mx-auto">
+            At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
+          </p>
+        </motion.div>
+      </section>
+
       {/* ── How it works ───────────────────────────────────────────── */}
       <section id="how-it-works" className="max-w-5xl mx-auto px-6 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -200,43 +235,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Tagline ────────────────────────────────────────────────── */}
-      <section className="max-w-2xl mx-auto px-6 pt-4 pb-12 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="inline-flex items-center gap-2 bg-[#635BFF]/10 border border-[#635BFF]/20 text-[#635BFF] text-xs font-semibold px-4 py-2 rounded-full mb-6 uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF] animate-pulse" />
-            Free · No account · Processes in your browser
-          </div>
-          <p className="text-[#1A1F36] text-xl sm:text-2xl font-bold leading-snug tracking-tight">
-            {[
-              'A free, simple, no-nonsense MRR calculator',
-              'built for',
-              '$100–$10k MRR',
-              'B2B SaaS startups.',
-            ].map((chunk, i) => (
-              <motion.span
-                key={i}
-                className={`inline ${i === 2 ? 'text-[#635BFF] cursor-default' : 'cursor-default'}`}
-                whileHover={{ y: i === 2 ? -3 : -1, color: i === 2 ? '#4f46e5' : '#635BFF' }}
-                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              >
-                {chunk}{' '}
-              </motion.span>
-            ))}
-          </p>
-          <p className="mt-4 text-gray-500 text-base leading-relaxed max-w-xl mx-auto">
-            At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
-          </p>
-        </motion.div>
-      </section>
+      {/* Smooth gradient bridge between feature cards and calculator */}
+      <div className="h-12 bg-gradient-to-b from-[#F6F9FC] via-[#f0f4f9] to-white" />
 
       {/* ── Calculator card ────────────────────────────────────────── */}
-      <section id="calculator" className="max-w-3xl mx-auto px-6 pb-20">
+      <section id="calculator" className="max-w-3xl mx-auto px-6 pb-20 bg-white">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
