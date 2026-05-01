@@ -175,7 +175,7 @@ export default function HomePage() {
       <div className="h-16 bg-gradient-to-b from-[#0f3460] to-[#F6F9FC]" />
 
       {/* ── Tagline ────────────────────────────────────────────────── */}
-      <section className="max-w-3xl mx-auto px-6 pt-10 pb-10 text-center">
+      <section id="how-it-works" className="max-w-3xl mx-auto px-6 pt-10 pb-10 text-center scroll-mt-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -202,14 +202,14 @@ export default function HomePage() {
               </motion.span>
             ))}
           </p>
-          <p className="text-gray-500 text-sm leading-relaxed mx-auto sm:whitespace-nowrap">
+          <p className="text-gray-500 text-sm leading-relaxed mx-auto text-center sm:whitespace-nowrap">
             At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
           </p>
         </motion.div>
       </section>
 
       {/* ── How it works ───────────────────────────────────────────── */}
-      <section id="how-it-works" className="max-w-5xl mx-auto px-6 pb-10 scroll-mt-20">
+      <section className="max-w-5xl mx-auto px-6 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {features.map((f, i) => (
             <motion.div
