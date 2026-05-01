@@ -203,7 +203,7 @@ export default function HomePage() {
       <div className="h-16 bg-gradient-to-b from-[#0f3460] to-[#F6F9FC]" />
 
       {/* ── How it works ───────────────────────────────────────────── */}
-      <section id="how-it-works" className="max-w-5xl mx-auto px-6 pb-10">
+      <section id="how-it-works" className="max-w-5xl mx-auto px-6 pb-10 scroll-mt-20">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {features.map((f, i) => (
             <motion.div
@@ -228,7 +228,7 @@ export default function HomePage() {
       <div className="h-12 bg-gradient-to-b from-[#F6F9FC] via-[#f0f4f9] to-white" />
 
       {/* ── Calculator card ────────────────────────────────────────── */}
-      <section id="calculator" className="max-w-3xl mx-auto px-6 pb-20 bg-white">
+      <section id="calculator" className="max-w-3xl mx-auto px-6 pb-20 bg-white scroll-mt-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
