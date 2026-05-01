@@ -138,7 +138,7 @@ export default function HomePage() {
       </header>
 
       {/* ── Hero ───────────────────────────────────────────────────── */}
-      <div className="relative bg-gradient-to-b from-[#0A2540] via-[#0d2d4f] to-[#F6F9FC] px-6 pt-20 pb-32 overflow-hidden">
+      <div className="relative bg-gradient-to-b from-[#0A2540] via-[#0d2d4f] to-[#0f3460] px-6 pt-20 pb-24 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: 'linear-gradient(#635BFF 1px, transparent 1px), linear-gradient(90deg, #635BFF 1px, transparent 1px)',
           backgroundSize: '40px 40px',
@@ -177,8 +177,11 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Dark → light transition strip */}
+      <div className="h-16 bg-gradient-to-b from-[#0f3460] to-[#F6F9FC]" />
+
       {/* ── How it works ───────────────────────────────────────────── */}
-      <section id="how-it-works" className="max-w-5xl mx-auto px-6 -mt-16 mb-8">
+      <section id="how-it-works" className="max-w-5xl mx-auto px-6 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {features.map((f, i) => (
             <motion.div
