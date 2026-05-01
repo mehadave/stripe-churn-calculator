@@ -15,12 +15,12 @@ _[Demo GIF — coming soon]_
 ## Quick Start
 
 **Option 1 — Use the hosted version:**  
-👉 [stripe-churn-calculator.vercel.app](https://stripe-churn-calculator.vercel.app) _(deploy link — update after Vercel deploy)_
+👉 [stripe-churn-calculator.vercel.app](https://stripe-churn-calculator.vercel.app)
 
 **Option 2 — Run locally:**
 
 ```bash
-git clone https://github.com/yourusername/stripe-churn-calculator
+git clone https://github.com/mehadave/stripe-churn-calculator
 cd stripe-churn-calculator
 npm install
 npm run dev
@@ -64,7 +64,7 @@ Or skip the export and enter your numbers manually.
 
 ## Deploy your own
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/stripe-churn-calculator)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/mehadave/stripe-churn-calculator)
 
 No environment variables needed. Zero config.
 
