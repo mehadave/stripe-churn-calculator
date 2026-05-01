@@ -123,9 +123,7 @@ export default function HomePage() {
               GitHub
             </a>
             <a
-              href="https://getreflow.co"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/reflow"
               className="flex items-center gap-1.5 text-white text-sm px-3 py-1.5 rounded-lg bg-[#635BFF] hover:bg-[#5248e0] transition-colors font-medium shadow-sm"
             >
               Recover with Reflow

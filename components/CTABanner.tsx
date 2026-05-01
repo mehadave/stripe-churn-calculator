@@ -33,9 +33,7 @@ export default function CTABanner({ recoveryOpportunity }: CTABannerProps) {
           Smart payment retry logic recovers ~70% of failed payments automatically — without any manual work.
         </p>
         <motion.a
-          href="https://getreflow.co"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/reflow"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#635BFF] text-white font-semibold text-sm shadow-lg shadow-[#635BFF]/30 hover:bg-[#5248e0] transition-colors"
