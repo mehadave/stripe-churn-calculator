@@ -98,7 +98,7 @@ export default function HomePage() {
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#FF4D4F] border-2 border-[#0A2540]" />
             </div>
             <div>
-              <span className="text-white font-bold text-sm tracking-tight">stripe-churn-calculator</span>
+              <span className="text-white font-bold text-sm tracking-tight">Stripe Churn Calculator</span>
               <span className="ml-2 text-[10px] font-semibold text-[#635BFF] bg-[#635BFF]/15 px-1.5 py-0.5 rounded-full uppercase tracking-wider">free</span>
             </div>
           </div>
@@ -200,6 +200,41 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Tagline ────────────────────────────────────────────────── */}
+      <section className="max-w-2xl mx-auto px-6 pt-4 pb-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="inline-flex items-center gap-2 bg-[#635BFF]/10 border border-[#635BFF]/20 text-[#635BFF] text-xs font-semibold px-4 py-2 rounded-full mb-6 uppercase tracking-widest">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF] animate-pulse" />
+            Free · No account · Processes in your browser
+          </div>
+          <p className="text-[#1A1F36] text-xl sm:text-2xl font-bold leading-snug tracking-tight">
+            {[
+              'A free, simple, no-nonsense MRR calculator',
+              'built for',
+              '$100–$10k MRR',
+              'B2B SaaS startups.',
+            ].map((chunk, i) => (
+              <motion.span
+                key={i}
+                className={`inline ${i === 2 ? 'text-[#635BFF] cursor-default' : 'cursor-default'}`}
+                whileHover={{ y: i === 2 ? -3 : -1, color: i === 2 ? '#4f46e5' : '#635BFF' }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              >
+                {chunk}{' '}
+              </motion.span>
+            ))}
+          </p>
+          <p className="mt-4 text-gray-500 text-base leading-relaxed max-w-xl mx-auto">
+            At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
+          </p>
+        </motion.div>
+      </section>
+
       {/* ── Calculator card ────────────────────────────────────────── */}
       <section id="calculator" className="max-w-3xl mx-auto px-6 pb-20">
         <motion.div
@@ -293,6 +328,44 @@ export default function HomePage() {
           </div>
         </motion.div>
       </section>
+
+      {/* ── Footer ─────────────────────────────────────────────────── */}
+      <footer className="bg-[#0A2540] border-t border-white/5 mt-4">
+        <div className="max-w-5xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+          <div className="flex items-center gap-3">
+            <div className="relative flex items-center justify-center w-7 h-7 rounded-[6px] bg-[#3730A3]">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="white" viewBox="0 0 24 24">
+                <polyline points="2,7 8,13 14,7 22,15" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-[#FF4D4F]" />
+            </div>
+            <span className="text-gray-400 font-medium">Stripe Churn Calculator</span>
+          </div>
+
+          <p className="text-gray-600 text-xs text-center">
+            Made with <span className="text-red-400">❤️</span> in California &nbsp;·&nbsp; Open source &nbsp;·&nbsp; Free forever
+          </p>
+
+          <div className="flex items-center gap-4">
+            <a
+              href="mailto:davemeha60@gmail.com"
+              className="text-gray-500 hover:text-[#a5a0ff] transition-colors text-xs"
+            >
+              davemeha60@gmail.com
+            </a>
+            <a
+              href="https://github.com/mehadave/stripe-churn-calculator"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </footer>
 
     </div>
   )
