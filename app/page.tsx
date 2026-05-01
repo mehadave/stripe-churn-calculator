@@ -157,10 +157,10 @@ export default function HomePage() {
               ].map(({ t, h }, i) => (
                 <motion.span
                   key={i}
-                  initial={{ opacity: 0, y: 14, filter: 'blur(8px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  transition={{ delay: 0.15 + i * 0.07, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className={h ? 'text-[#a5a0ff] font-black' : 'text-white/80'}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.12 + i * 0.06, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className={h ? 'text-[#a5a0ff] font-black' : 'text-white'}
                 >
                   {t}
                 </motion.span>
