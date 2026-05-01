@@ -170,7 +170,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.5 }}
-              className="text-gray-400 text-base leading-relaxed max-w-xl mx-auto mb-8"
+              className="text-gray-400 text-sm leading-relaxed mx-auto mb-8 sm:whitespace-nowrap"
             >
               At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
             </motion.p>
