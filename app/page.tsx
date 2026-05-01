@@ -146,10 +146,26 @@ export default function HomePage() {
 
         <div className="relative max-w-3xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <div className="inline-flex items-center gap-2 bg-[#635BFF]/20 border border-[#635BFF]/30 text-[#a5a0ff] text-xs font-semibold px-4 py-2 rounded-full mb-8 uppercase tracking-widest">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF] animate-pulse" />
-              Free · No account · Processes in your browser
-            </div>
+            {/* Animated tagline — word-by-word fog reveal */}
+            <p className="text-lg sm:text-xl font-semibold leading-relaxed mb-6 flex flex-wrap justify-center gap-x-1.5 gap-y-0.5">
+              {[
+                { t: 'A', h: false }, { t: 'free,', h: false }, { t: 'simple,', h: false },
+                { t: 'no-nonsense', h: false }, { t: 'MRR', h: false }, { t: 'calculator', h: false },
+                { t: 'built', h: false }, { t: 'for', h: false },
+                { t: '$100–$10k', h: true }, { t: 'MRR', h: true },
+                { t: 'SaaS', h: false }, { t: 'startups.', h: false },
+              ].map(({ t, h }, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 14, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ delay: 0.15 + i * 0.07, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className={h ? 'text-[#a5a0ff] font-black' : 'text-white/80'}
+                >
+                  {t}
+                </motion.span>
+              ))}
+            </p>
             <h1 className="text-5xl sm:text-6xl font-black text-white leading-tight mb-6 tracking-tight">
               How much MRR are<br />
               <span className="text-[#FF4D4F]">you leaking?</span>
@@ -177,41 +193,6 @@ export default function HomePage() {
 
       {/* Dark → light transition strip */}
       <div className="h-16 bg-gradient-to-b from-[#0f3460] to-[#F6F9FC]" />
-
-      {/* ── Tagline ────────────────────────────────────────────────── */}
-      <section className="max-w-2xl mx-auto px-6 pt-8 pb-12 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="inline-flex items-center gap-2 bg-[#635BFF]/10 border border-[#635BFF]/20 text-[#635BFF] text-xs font-semibold px-4 py-2 rounded-full mb-6 uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF] animate-pulse" />
-            Free · No account · Processes in your browser
-          </div>
-          <p className="text-[#1A1F36] text-xl sm:text-2xl font-bold leading-snug tracking-tight">
-            {[
-              'A free, simple, no-nonsense MRR calculator',
-              'built for',
-              '$100–$10k MRR',
-              'SaaS startups.',
-            ].map((chunk, i) => (
-              <motion.span
-                key={i}
-                className={`inline ${i === 2 ? 'text-[#635BFF] cursor-default' : 'cursor-default'}`}
-                whileHover={{ y: i === 2 ? -3 : -1, color: i === 2 ? '#4f46e5' : '#635BFF' }}
-                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-              >
-                {chunk}{' '}
-              </motion.span>
-            ))}
-          </p>
-          <p className="mt-4 text-gray-500 text-base leading-relaxed max-w-xl mx-auto">
-            At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
-          </p>
-        </motion.div>
-      </section>
 
       {/* ── How it works ───────────────────────────────────────────── */}
       <section id="how-it-works" className="max-w-5xl mx-auto px-6 pb-10">
@@ -346,7 +327,7 @@ export default function HomePage() {
           </div>
 
           <p className="text-gray-600 text-xs text-center">
-            Made with <span className="text-red-400">❤️</span> in California &nbsp;·&nbsp; Open source &nbsp;·&nbsp; Free forever
+            Made with <span className="text-red-400">❤️</span>{' '}in California &nbsp;·&nbsp; Open source
           </p>
 
           <div className="flex items-center gap-4">
@@ -354,7 +335,7 @@ export default function HomePage() {
               href="mailto:davemeha60@gmail.com"
               className="text-gray-500 hover:text-[#a5a0ff] transition-colors text-xs"
             >
-              davemeha60@gmail.com
+              Contact
             </a>
             <a
               href="https://github.com/mehadave/stripe-churn-calculator"
