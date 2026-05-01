@@ -105,8 +105,8 @@ export default function HomePage() {
 
           {/* Nav */}
           <nav className="hidden sm:flex items-center gap-1">
-            <a href="#calculator" className="text-gray-400 hover:text-white text-sm px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all">Calculator</a>
-            <a href="#how-it-works" className="text-gray-400 hover:text-white text-sm px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all">How it works</a>
+            <button onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-white text-sm px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all">Calculator</button>
+            <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-white text-sm px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all">How it works</button>
           </nav>
 
           {/* CTA */}
