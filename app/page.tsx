@@ -146,34 +146,6 @@ export default function HomePage() {
 
         <div className="relative max-w-3xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            {/* Animated tagline — word-by-word fog reveal */}
-            <p className="text-lg sm:text-xl font-semibold leading-relaxed mb-6 flex flex-wrap justify-center gap-x-1.5 gap-y-0.5">
-              {[
-                { t: 'A', h: false }, { t: 'free,', h: false }, { t: 'simple,', h: false },
-                { t: 'no-nonsense', h: false }, { t: 'MRR', h: false }, { t: 'calculator', h: false },
-                { t: 'built', h: false }, { t: 'for', h: false },
-                { t: '$100–$10k', h: true }, { t: 'MRR', h: true },
-                { t: 'SaaS', h: false }, { t: 'startups.', h: false },
-              ].map(({ t, h }, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.12 + i * 0.06, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className={h ? 'text-[#a5a0ff] font-black' : 'text-white'}
-                >
-                  {t}
-                </motion.span>
-              ))}
-            </p>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.5 }}
-              className="text-gray-400 text-sm leading-relaxed mx-auto mb-8 sm:whitespace-nowrap"
-            >
-              At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
-            </motion.p>
             <h1 className="text-5xl sm:text-6xl font-black text-white leading-tight mb-6 tracking-tight">
               How much MRR are<br />
               <span className="text-[#FF4D4F]">you leaking?</span>
@@ -201,6 +173,40 @@ export default function HomePage() {
 
       {/* Dark → light transition strip */}
       <div className="h-16 bg-gradient-to-b from-[#0f3460] to-[#F6F9FC]" />
+
+      {/* ── Tagline ────────────────────────────────────────────────── */}
+      <section className="max-w-3xl mx-auto px-6 pt-10 pb-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-[#1A1F36] text-xl sm:text-2xl font-bold leading-snug tracking-tight flex flex-wrap justify-center gap-x-1.5 gap-y-0.5 mb-4">
+            {[
+              { t: 'A', h: false }, { t: 'free,', h: false }, { t: 'simple,', h: false },
+              { t: 'no-nonsense', h: false }, { t: 'MRR', h: false }, { t: 'calculator', h: false },
+              { t: 'built', h: false }, { t: 'for', h: false },
+              { t: '$100–$10k', h: true }, { t: 'MRR', h: true },
+              { t: 'SaaS', h: false }, { t: 'startups.', h: false },
+            ].map(({ t, h }, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.05 + i * 0.05, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className={h ? 'text-[#635BFF] font-black' : 'text-[#1A1F36]'}
+              >
+                {t}
+              </motion.span>
+            ))}
+          </p>
+          <p className="text-gray-500 text-sm leading-relaxed mx-auto sm:whitespace-nowrap">
+            At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
+          </p>
+        </motion.div>
+      </section>
 
       {/* ── How it works ───────────────────────────────────────────── */}
       <section id="how-it-works" className="max-w-5xl mx-auto px-6 pb-10 scroll-mt-20">
