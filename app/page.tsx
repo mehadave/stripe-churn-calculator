@@ -91,11 +91,11 @@ export default function HomePage() {
 
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-[#635BFF] shadow-lg shadow-[#635BFF]/40">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+            <div className="relative flex items-center justify-center w-9 h-9 rounded-[7px] bg-[#3730A3] shadow-lg shadow-[#3730A3]/50">
+              <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 24 24">
+                <polyline points="2,7 8,13 14,7 22,15" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#FF4D4F] border border-[#0A2540]" />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#FF4D4F] border-2 border-[#0A2540]" />
             </div>
             <div>
               <span className="text-white font-bold text-sm tracking-tight">stripe-churn-calculator</span>
