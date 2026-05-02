@@ -202,9 +202,11 @@ export default function HomePage() {
               </motion.span>
             ))}
           </p>
-          <p className="text-gray-500 text-sm leading-relaxed mx-auto text-center sm:whitespace-nowrap">
-            At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
-          </p>
+          <div className="flex justify-center mt-4">
+            <p className="text-gray-500 text-sm leading-relaxed sm:whitespace-nowrap">
+              At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
+            </p>
+          </div>
         </motion.div>
       </section>
 
