@@ -54,11 +54,11 @@ export default function LeakReport({ report }: LeakReportProps) {
         transition={{ duration: 0.5 }}
         className="rounded-2xl overflow-hidden shadow-xl shadow-gray-200/60 border border-gray-200/80"
       >
-        <div className="relative bg-[#0A2540] px-8 py-8 overflow-hidden">
+        <div className="relative bg-[#0A2540] px-4 sm:px-8 py-6 sm:py-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#635BFF]/10 via-transparent to-transparent" />
           <div className="absolute top-0 right-0 w-72 h-72 bg-[#FF4D4F]/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/2" />
 
-          <div className="relative flex items-start justify-between gap-4">
+          <div className="relative flex flex-wrap items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <p className="text-gray-500 text-sm font-medium uppercase tracking-widest">You&apos;re leaking</p>
@@ -91,7 +91,7 @@ export default function LeakReport({ report }: LeakReportProps) {
           </div>
         </div>
 
-        <div className="px-8 py-3.5 bg-[#F6F9FC] border-t border-gray-100 flex items-center gap-1.5 text-sm text-gray-500">
+        <div className="px-4 sm:px-8 py-3.5 bg-[#F6F9FC] border-t border-gray-100 flex items-center gap-1.5 text-sm text-gray-500">
           <span className="font-semibold text-[#1A1F36]">{report.totalCustomers} customers</span>
           <span className="text-gray-300">·</span>
           <span className="font-semibold text-[#1A1F36]">{report.monthsInDataset} month{report.monthsInDataset !== 1 ? 's' : ''}</span>

@@ -204,7 +204,7 @@ export default function HomePage() {
             ))}
           </p>
           <div className="flex justify-center mt-4">
-            <p className="text-gray-500 text-sm leading-relaxed sm:whitespace-nowrap">
+            <p className="text-gray-500 text-sm leading-relaxed">
               At this stage, every dollar of leaked MRR matters — but you shouldn&apos;t have to pay for tools just to understand what you&apos;re losing.
             </p>
           </div>
@@ -246,13 +246,13 @@ export default function HomePage() {
           className="bg-white rounded-2xl border border-gray-200/80 shadow-xl shadow-gray-200/60 overflow-hidden"
         >
           {/* Card header */}
-          <div className="px-8 pt-7 pb-0">
+          <div className="px-4 sm:px-8 pt-7 pb-0">
             <h2 className="text-[#1A1F36] font-black text-xl mb-1">Calculate your MRR leak</h2>
             <p className="text-gray-400 text-sm">Upload a Stripe export for the most accurate results, or enter your numbers manually.</p>
           </div>
 
           {/* Tabs */}
-          <div className="flex p-3 gap-1 mx-8 mt-5 bg-[#F6F9FC] rounded-xl border border-gray-100">
+          <div className="flex p-3 gap-1 mx-4 sm:mx-8 mt-5 bg-[#F6F9FC] rounded-xl border border-gray-100">
             {(['csv', 'manual'] as Tab[]).map(t => (
               <button
                 key={t}
@@ -273,7 +273,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="p-8 pt-6">
+          <div className="p-4 sm:p-8 pt-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={tab}
@@ -319,7 +319,7 @@ export default function HomePage() {
             </AnimatePresence>
           </div>
 
-          <div className="px-8 pb-6 flex items-center gap-2 text-xs text-gray-400 border-t border-gray-50 pt-4">
+          <div className="px-4 sm:px-8 pb-6 flex items-center gap-2 text-xs text-gray-400 border-t border-gray-50 pt-4">
             <div className="w-4 h-4 rounded-full bg-[#00D4AA]/15 flex items-center justify-center flex-shrink-0">
               <svg className="w-2.5 h-2.5 text-[#00D4AA]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
