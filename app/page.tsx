@@ -87,7 +87,7 @@ export default function HomePage() {
 
       {/* ── Header ─────────────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 bg-[#0A2540]/95 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+        <div className="max-w-5xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-6">
 
           {/* Logo */}
           <div className="flex items-center gap-3">
@@ -288,7 +288,7 @@ export default function HomePage() {
                 {tab === 'csv' ? (
                   <div className="space-y-4">
                     <CSVUploader onFile={handleCSV} loading={loading} error={error} />
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="bg-[#00D4AA]/5 border border-[#00D4AA]/20 rounded-xl p-4">
                         <div className="flex items-center gap-1.5 mb-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#00D4AA]" />
