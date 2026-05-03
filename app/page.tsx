@@ -97,9 +97,12 @@ export default function HomePage() {
               </svg>
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#FF4D4F] border-2 border-[#0A2540]" />
             </div>
-            <div>
-              <span className="text-white font-bold text-sm tracking-tight">Stripe Churn Calculator</span>
-              <span className="ml-2 text-[10px] font-semibold text-[#635BFF] bg-[#635BFF]/15 px-1.5 py-0.5 rounded-full uppercase tracking-wider">free</span>
+            <div className="flex items-center gap-2 whitespace-nowrap">
+              <span className="text-white font-bold text-sm tracking-tight">
+                <span className="hidden sm:inline">Stripe Churn Calculator</span>
+                <span className="sm:hidden">Stripe Churn</span>
+              </span>
+              <span className="text-[10px] font-semibold text-[#635BFF] bg-[#635BFF]/15 px-1.5 py-0.5 rounded-full uppercase tracking-wider">free</span>
             </div>
           </div>
 
