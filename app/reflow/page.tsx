@@ -22,7 +22,6 @@ export default function ReflowPage() {
             <svg className="w-8 h-8" fill="none" stroke="white" viewBox="0 0 24 24">
               <polyline points="2,7 8,13 14,7 22,15" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-[#FF4D4F] border-2 border-[#0A2540]" />
           </div>
         </div>
 

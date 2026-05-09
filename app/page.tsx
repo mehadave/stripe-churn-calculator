@@ -95,7 +95,6 @@ export default function HomePage() {
               <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 24 24">
                 <polyline points="2,7 8,13 14,7 22,15" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#FF4D4F] border-2 border-[#0A2540]" />
             </div>
             <div className="flex items-center gap-2 whitespace-nowrap">
               <span className="text-white font-bold text-sm tracking-tight">
@@ -341,7 +340,6 @@ export default function HomePage() {
               <svg className="w-3.5 h-3.5" fill="none" stroke="white" viewBox="0 0 24 24">
                 <polyline points="2,7 8,13 14,7 22,15" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-[#FF4D4F]" />
             </div>
             <span className="text-gray-400 font-medium">Stripe Churn Calculator</span>
           </div>
